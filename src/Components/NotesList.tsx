@@ -4,12 +4,19 @@ import Notes from "./Notes"
 
 type Props = {
   notes: Note[]
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>
 }
 
-const NotesList = ({ notes }: Props) => {
+const NotesList = ({ notes, setNotes }: Props) => {
+  const handleDelete = (id: string) => {
+    setNotes(notes.filter((note) => note.id != id))
+  }
+
   const renderNotes = (): JSX.Element[] => {
     return notes.map((note) => {
-      return <Notes key={note.id} note={note}></Notes>
+      return (
+        <Notes key={note.id} note={note} handleDelete={handleDelete}></Notes>
+      )
     })
   }
 

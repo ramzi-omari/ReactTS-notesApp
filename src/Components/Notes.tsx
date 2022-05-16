@@ -4,9 +4,10 @@ import { Note } from "../models/note.model"
 
 type Props = {
   note: Note
+  handleDelete: (id: string) => void
 }
 
-const Notes = ({ note }: Props) => {
+const Notes = ({ note, handleDelete }: Props) => {
   return (
     <div className="mb-3">
       <Card style={{ backgroundColor: note.color }}>
@@ -14,7 +15,11 @@ const Notes = ({ note }: Props) => {
           <Card.Title>{note.title}</Card.Title>
           <Card.Text>{note.text}</Card.Text>
           <Card.Subtitle className="text-muted">{note.date}</Card.Subtitle>
-          <Button className="mt-3" variant="danger">
+          <Button
+            className="mt-3"
+            variant="danger"
+            onClick={() => handleDelete(note.id)}
+          >
             Delete
           </Button>
         </Card.Body>
